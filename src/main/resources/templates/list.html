@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Notes</title>
+</head>
+<body>
+<style>
+    .note {
+        padding: 10px;
+        margin: 5px;
+        background-color: aqua;
+    }
+
+    .note-content {
+        padding: 5px;
+        background-color: burlywood;
+    }
+</style>
+<!--        <h1 th:text="'notes: ' + ${notes.size()}"></h1>-->
+
+<div th:each="note: ${notes}" class="note">
+    <div th:text="'Title: ' + ${note.title}"></div>
+    <div class="note-content" th:text="${note.content}"></div>
+    <div>
+        <form action="/note/delete" method="POST">
+            <input type="hidden" name="id" th:value="${note.id}">
+            <button type="submit">Delete</button>
+        </form>
+        <form action="/note/edit" method="GET">
+            <input type="hidden" name="id" th:value="${note.id}">
+            <button type="submit">Edit</button>
+        </form>
+    </div>
+</div>
+
+<form action="/note/add" method="post">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title"><br>
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
+    <button type="submit">Add Note</button>
+</form>
+</body>
+</html>
