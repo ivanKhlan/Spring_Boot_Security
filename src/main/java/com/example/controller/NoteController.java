@@ -37,13 +37,10 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
+
     @PostMapping("/add")
     public ModelAndView addNote(@RequestParam("title") String title,
                           @RequestParam("content") String content) {
-
-        if (!authService.hasAuthority("admin")) {
-            return new ModelAndView("forbidden");
-        }
         Note newNote = new Note();
         newNote.setTitle(title);
         newNote.setContent(content);
